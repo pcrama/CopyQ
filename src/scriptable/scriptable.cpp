@@ -1671,6 +1671,13 @@ void Scriptable::fail()
     abortEvaluation(Abort::CurrentEvaluation);
 }
 
+void Scriptable::crash()
+{
+    int *bad = nullptr;
+    *bad = 0;
+    Q_UNUSED(bad);
+}
+
 #ifdef HAS_TESTS
 void Scriptable::keys()
 {

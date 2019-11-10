@@ -41,7 +41,6 @@ set COPYQ_TESTS_RERUN_FAILED=1
 "%Executable%" --help || goto :error
 "%Executable%" --version || goto :error
 "%Executable%" --info || goto :error
-"%Executable%" tests || goto :error
 
 :error
 exit /b %errorlevel%

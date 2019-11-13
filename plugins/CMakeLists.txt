@@ -30,6 +30,9 @@ macro (copyq_add_plugin copyq_pkg)
     set_target_properties(${copyq_pkg} PROPERTIES
         COMPILE_DEFINITIONS "${copyq_plugin_${copyq_pkg}_DEFINITIONS}")
 
+    # Omit linking against large debug libraries.
+    set_target_properties(${copyq_LIBRARIES} ${copyq_plugin_${copyq_pkg}_LIBRARIES} PROPERTIES MAP_IMPORTED_CONFIG_RELWITHDEBINFO "RELEASE")
+
     target_link_libraries(${copyq_pkg} ${copyq_LIBRARIES} ${copyq_plugin_${copyq_pkg}_LIBRARIES})
 
     if (UNIX AND NOT APPLE)

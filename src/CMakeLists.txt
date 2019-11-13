@@ -107,12 +107,15 @@ foreach (copyq_qt_module ${copyq_qt_modules})
     list(APPEND copyq_LIBRARIES Qt5::${copyq_qt_module})
 endforeach()
 
+# Omit linking against large debug libraries.
+set_target_properties(${copyq_LIBRARIES} PROPERTIES MAP_IMPORTED_CONFIG_RELWITHDEBINFO "RELEASE")
+
 # macros definitions for preprocessor and moc
 set_target_properties(${COPYQ_EXECUTABLE_NAME} PROPERTIES COMPILE_DEFINITIONS "${copyq_DEFINITIONS}")
 
 # link
 set_target_properties(${COPYQ_EXECUTABLE_NAME} PROPERTIES LINK_FLAGS "${copyq_LINK_FLAGS}")
-target_link_libraries(${COPYQ_EXECUTABLE_NAME} ${copyq_LIBRARIES})
+target_link_libraries(${COPYQ_EXECUTABLE_NAME} ${copyq_LIBRARIES} ${copyq_static_LIBRARIES})
 
 # install
 install(TARGETS ${COPYQ_EXECUTABLE_NAME}
